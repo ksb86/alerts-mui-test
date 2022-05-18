@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import CssBaseline from '@mui/material/CssBaseline';
 import './App.css';
+import { AlertExample, AlertManager, useAlertReducer } from './components';
+import { createContext } from 'react';
+
+export const AlertsContext = createContext();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [alerts, dispatch] = useAlertReducer();
+
+    return (
+        <AlertsContext.Provider value={{ alerts, dispatch }}>
+            <CssBaseline />
+            <div className="App">
+                <AlertsContext.Consumer>
+                    {({ alerts, dispatch }) => (
+                        <>
+                            <AlertManager alerts={alerts} dispatch={dispatch} />
+                            <AlertExample alerts={alerts} dispatch={dispatch} />
+                        </>
+                    )}
+                </AlertsContext.Consumer>
+            </div>
+        </AlertsContext.Provider>
+    );
 }
 
 export default App;
