@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Box } from "@mui/material"
+import { Alert, AlertTitle, Box, Link } from "@mui/material"
 
 export default function CustomAlert({
     dispatch,
@@ -20,7 +20,7 @@ export default function CustomAlert({
         <Box id={id} sx={{mb: 1}}>
             <Alert id={id} severity={alertType} onClose={handleClose}>
                 {Boolean(alertTitle) && <AlertTitle>{alertTitle}</AlertTitle>}
-                {link ? <a href={link} target="_blank" rel="noreferrer">{text}</a> : text}
+                {link ? <Link href={link} target="_blank" rel="noreferrer">{text}</Link> : text}
             </Alert>
         </Box>
     );
